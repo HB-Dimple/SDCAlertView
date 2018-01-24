@@ -31,6 +31,17 @@ public class AlertAction: NSObject {
         self.style = style
         self.handler = handler
     }
+    
+    public convenience init(title: String?, image : UIImage?, highlightedImage : UIImage?,  style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil)
+    {
+        self.init()
+        self.title = title
+        self.style = style
+        self.handler = handler
+        self.image = image
+        self.highlightedImage = highlightedImage
+    }
+
 
     /**
     Creates an action with a stylized title.
@@ -59,6 +70,21 @@ public class AlertAction: NSObject {
 
     /// The stylized title for the action.
     private(set) public var attributedTitle: NSAttributedString?
+    
+    private(set) public var image: UIImage?// {
+    //        get { return self.image }
+    //        set {
+    //            self.image = newValue.map(UIImage.init)
+    //        }
+    //    }
+    
+    private(set) public var highlightedImage: UIImage?// {
+    //        get { return self.highlightedImage }
+    //        set {
+    //            self.highlightedImage = newValue.map(UIImage.init)
+    //        }
+    //    }
+
 
     /// The action's style.
     internal(set) public var style: AlertActionStyle = .normal
