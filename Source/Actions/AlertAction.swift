@@ -24,7 +24,6 @@ public class AlertAction: NSObject {
     - parameter style:   The action's style
     - parameter handler: An optional closure that's called when the user taps on this action
     */
-    @objc
     public convenience init(title: String?, style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil)
     {
         self.init()
@@ -32,6 +31,17 @@ public class AlertAction: NSObject {
         self.style = style
         self.handler = handler
     }
+    
+    public convenience init(title: String?, image : UIImage?, highlightedImage : UIImage?,  style: AlertActionStyle, handler: ((AlertAction) -> Void)? = nil)
+    {
+        self.init()
+        self.title = title
+        self.style = style
+        self.handler = handler
+        self.image = image
+        self.highlightedImage = highlightedImage
+    }
+
 
     /**
     Creates an action with a stylized title.
@@ -40,7 +50,6 @@ public class AlertAction: NSObject {
     - parameter style:           The action's style
     - parameter handler:         An optional closure that is called when the user taps on this action
     */
-    @objc
     public convenience init(attributedTitle: NSAttributedString?, style: AlertActionStyle,
         handler: ((AlertAction) -> Void)? = nil)
     {
@@ -51,30 +60,36 @@ public class AlertAction: NSObject {
     }
 
     /// A closure that gets executed when the user taps on this actions in the UI
-    @objc
     public var handler: ((AlertAction) -> Void)?
 
     /// The plain title for the action. Uses `attributedTitle` directly.
-    @objc
     private(set) public var title: String? {
         get { return self.attributedTitle?.string }
         set { self.attributedTitle = newValue.map(NSAttributedString.init) }
     }
 
     /// The stylized title for the action.
-    @objc
     private(set) public var attributedTitle: NSAttributedString?
+    
+    private(set) public var image: UIImage?// {
+    //        get { return self.image }
+    //        set {
+    //            self.image = newValue.map(UIImage.init)
+    //        }
+    //    }
+    
+    private(set) public var highlightedImage: UIImage?// {
+    //        get { return self.highlightedImage }
+    //        set {
+    //            self.highlightedImage = newValue.map(UIImage.init)
+    //        }
+    //    }
+
 
     /// The action's style.
-    @objc
     internal(set) public var style: AlertActionStyle = .normal
 
-    /// The action's button accessibility identifier
-    @objc
-    public var accessibilityIdentifier: String?
-
     /// Whether this action can be interacted with by the user.
-    @objc
     public var isEnabled = true {
         didSet { self.actionView?.isEnabled = self.isEnabled }
     }

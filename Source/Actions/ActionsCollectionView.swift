@@ -40,7 +40,6 @@ class ActionsCollectionView: UICollectionView {
         self.delegate = self
         self.backgroundColor = .clear
         self.delaysContentTouches = false
-        self.translatesAutoresizingMaskIntoConstraints = false
 
         self.collectionViewLayout.register(ActionSeparatorView.self,
             forDecorationViewOfKind: kHorizontalActionSeparator)

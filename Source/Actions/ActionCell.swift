@@ -3,6 +3,7 @@ import UIKit
 final class ActionCell: UICollectionViewCell {
 
     @IBOutlet private(set) var titleLabel: UILabel!
+    @IBOutlet private(set) var imgView: UIImageView!
     @IBOutlet private var highlightedBackgroundView: UIView!
 
     private var textColor: UIColor?
@@ -24,10 +25,14 @@ final class ActionCell: UICollectionViewCell {
         self.titleLabel.textColor = self.textColor ?? self.tintColor
         
         self.titleLabel.attributedText = action.attributedTitle
+        self.imgView.image = action.image
+        self.imgView.highlightedImage = action.highlightedImage
 
         self.highlightedBackgroundView.backgroundColor = visualStyle.actionHighlightColor
 
-        self.setupAccessibility(using: action)
+        self.accessibilityLabel = action.attributedTitle?.string
+        self.accessibilityTraits = UIAccessibilityTraitButton
+        self.isAccessibilityElement = true
     }
 
     override func tintColorDidChange() {
